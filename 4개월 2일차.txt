@@ -1,0 +1,46 @@
+<수업 계획>
+
+	<바이너리 분석>
+
+		- c언어 분석
+		- asm 분석
+		- 취약점 분석
+
+	</바이너리 분석>
+
+	
+</수업 계획>
+
+* disk -> memory: binding
+
+<메모리 구조>
+
+	가상메모리 max size: 4GB.
+	하나의 프로세스가 4GB의 가상메모리를 할당 받음.
+	* 스케줄링이 물리메모리에 매핑하는 페이지를 결정
+	* disk를 거의 꽉 채우면 페이징이 자주 일어남.
+	<리눅스>
+
+		0x0 ~ 0xbfffffff: user memory
+
+		<user memory>
+			
+			text: 쓰지 않는 메모리가 있음 (0x8048000부터 씀.)
+			data: 문자열들이나 전역변수, heap
+
+			<heap>
+
+				동적할당을 위한 영역
+
+			</heap>
+
+			stack: 인자, 지역변수
+
+		</user memroy>
+
+		0xc0000000 ~ 0xffffffff: kernel memory
+
+	</리눅스>
+	
+	
+</메모리 구조>

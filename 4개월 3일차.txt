@@ -1,0 +1,110 @@
+<helloworld.c>
+	
+	#include <stdio.h>
+      
+      	#define MAX 256
+      
+      	int main() {
+              	printf("helloworld\n");
+              	printf("%d\n", MAX);
+              	return 0;
+      	}
+
+	<Makefile>
+
+		all: sample
+
+		sample: sample.c
+        		gcc -v -o sample sample.c
+
+		clean:
+        		rm -f $(subst sample.c,, $(wildcard sample*))
+
+	</Makefile>
+
+</helloworld.c>
+
+<helloworld.S>
+
+	extern printf
+
+	segment .data
+	msg: db 'helloworld', 0x0a
+
+	segment .text
+	global _start
+
+	_start:
+        	push $msg
+        	call printf
+
+	* _start: 리눅스 어셈블리의 진입 프로시저
+	* 컴파일 과정에서 레이블이 주소로 치환된다.
+
+	<Makefile>
+
+		all: sample
+
+		sample: sample.o
+        		ld -static -o sample sample.o -L/usr/lib/gcclib/i386-redhat-linux/egcs-2.91.66 -L/usr/i386-redhat-linux/lib -lgcc -lc -lgcc
+
+		sample.o: sample.S
+        		nasm -f elf32 -o sample.o sample.S
+
+		clean:
+        		rm -f $(subst sample.S,,$(wildcard sample*))
+	
+	</Makefile>
+
+</helloworld.S>
+
+<시스템 콜>
+	
+	* /usr/src/linux-2.2.14/include/asm-i386/unistd.h: 시스템 콜 관련 헤더
+	* man 2 write: write 함수 manual
+	* strace <program path>: 프로그램이 어떤 시스템 콜을 사용하는지.
+	* ltrace <program path>: 프로그램이 어떤 표준 함수를 사용하는지. 
+
+	segment .data
+	buf: db 'helloworld', 0x0a, 0
+
+	segment .text
+	global _start
+
+	_start:
+        	mov eax, 0x4
+        	mov ebx, 0x1
+        	mov ecx, buf
+        	mov edx, 11
+
+        	int 0x80
+
+	* 0x80 인터럽트: 시스템 콜 호출 인터럽트
+
+	<Makefile>
+
+		all: sample
+
+		sample: sample.o
+        		ld -static -m elf_i386 -o sample sample.o
+
+		sample.o: sample.S
+        		nasm -f elf32 -o sample.o sample.S
+
+		clean:
+        		rm -f $(subst sample.S,, $(wildcard sample*))
+
+		* 이제 표준 c 라이브러리가 필요치 않다.
+
+	</Makefile>
+
+</시스템 콜>
+
+* 시스템 프로그래밍: 시스템 콜로 프로그래밍 하는 것.
+
+* intel기반의 원래 어셈블리 문법에서 주소는 앞에 $를 붙여야함.
+
+* intel기반의 어셈블리 문법에서 주석은 ;이다.
+
+* exit(<status>) 시스템 콜은 프로세스 종료시 세그먼트 폴트를 방지해 준다. syscall 번호 1
+
