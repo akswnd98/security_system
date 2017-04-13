@@ -1,0 +1,20 @@
+* 주의: mov <mem>, <mem>
+	add <mem>, <mem>등은 불가
+
+<곱셈>
+
+	<부호 없는 곱셈>
+		
+		mul <operand>
+	
+	</부호 없는 곱셈>
+
+	<부호 있는 곱셈>
+
+		imul <operand>[, <operand>[, <operand>]]
+
+	</부호 있는 곱셈>
+
+	* 32bit에서 4byte * 4byte의 결과는 eax와 edx를 함께 사용하여 표현한다.
+
+</곱셈>

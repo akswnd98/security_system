@@ -1,0 +1,29 @@
+<data memory>
+
+	<초기화된 데이터 메모리 영역>
+
+		segment .data
+
+		format: db: 'a', 'b', 0x0a, 0
+
+	</초기화된 데이터 메모리 영역>
+
+	<비 초기화된 데이터 메모리 영역>
+
+		segment .bss
+
+		buffer: resb        : 10
+		label : REServe Byte: size
+
+	</비 초기화된 데이터 메모리 영역>
+
+</data memory>
+
+<어셈블리 기본 명령어 구조(인텔)>
+
+	- command: "pushfd", "nop", "ret", ...
+	- command operand: "pop esp", "jmp addr", ...
+	- command operand1 operand2: "mov ebx, 2", ...
+	- command operand1 operand2 operand3: "mul", ...
+
+</어셈블리 기본 명령어 구조(인텔)>
