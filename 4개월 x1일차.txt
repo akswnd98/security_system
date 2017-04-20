@@ -1,0 +1,46 @@
+<디버거>
+
+	- 버그잡는 프로그램
+
+	- 디버거를 통해서 타겟 프로그램을 실행시킴.
+
+</디버거>
+
+<gdb>
+
+
+	$eip와 같이 레지스터에 접근
+
+	- print : 변수나 레지스터의 값을 확인
+	- x: 메모리의 내용을 확인
+
+	x/(count)(type)(unit)
+
+		type:
+			s: 문자열
+			d: 10진
+			x: 16진
+			c: 문자
+			i: 명령어
+
+		unit:
+			b: 1byte
+			h: 2byte
+			w: 4byte
+
+	- display: 반복되는 명령어 등록
+		
+	display/(count)(type)(unit)으로 등록하면 실행 마다 x/(count)(type)(unit)가 실행됨.
+	delete display
+	info display
+
+	<실행추적>
+		
+		명령어를 하나씩 실행 하면서 실행.
+
+		- ni(next instruction)
+		- si(step in): 들어 갔을 때, 다 실행해야함.
+
+	</실행추적>
+
+</gdb>

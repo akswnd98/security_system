@@ -1,0 +1,43 @@
+<나눗셈 명령어>
+
+	ex)
+		mov eax, 10
+		mov ebx, 5
+		cdq ; convert dword to qword
+		div ebx
+
+
+	<cbw, cwd, cdq>
+		
+		cbw:
+			al -> al값
+			ah -> 0xff
+
+		cwd:
+			ax -> ax값
+			dx -> 0xffff
+
+		cdq:
+			eax -> eax값
+			edx -> 0xffffffff
+
+	</cbw, cwd, cdq>
+
+	<div>
+		
+		div <8bit>: al -> 몫, ah -> 나머지
+		div <16bit>: ax -> 몫, dx -> 나머지
+		div <32bit>: eax -> 몫, edx -> 나머지
+
+	</div>
+
+</나눗셈 명령어>
+
+<시프트 연산자>
+	
+	shl: left 0으로 채움
+	shr: right 0으로 채움
+	sal: left 0으로 채움
+	sar: right 1로 채움
+
+</시프트 연산자>
