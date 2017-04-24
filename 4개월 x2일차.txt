@@ -1,0 +1,78 @@
+0x8048470 <main>:	push   %ebp
+0x8048471 <main+1>:	mov    %esp,%ebp
+0x8048473 <main+3>:	push   %ebx
+0x8048474 <main+4>:	push   $0x8048570
+0x8048479 <main+9>:	call   0x8048394 <printf>
+0x804847e <main+14>:	add    $0x4,%esp
+0x8048481 <main+17>:	push   $0x80498e0
+0x8048486 <main+22>:	call   0x8048354 <gets>
+0x804848b <main+27>:	add    $0x4,%esp
+0x804848e <main+30>:	push   $0x80495e0
+0x8048493 <main+35>:	call   0x8048374 <strlen>
+0x8048498 <main+40>:	add    $0x4,%esp
+0x804849b <main+43>:	mov    %eax,0x8049ce8
+0x80484a0 <main+48>:	movl   $0x0,0x8049ce4
+0x80484aa <main+58>:	movl   $0x0,0x8049ce0
+0x80484b4 <main+68>:	mov    0x8049ce4,%eax
+0x80484b9 <main+73>:	cmp    0x8049ce8,%eax
+0x80484bf <main+79>:	jl     0x80484c3 <main+83>
+0x80484c1 <main+81>:	jmp    0x8048507 <main+151>
+0x80484c3 <main+83>:	mov    $0x80498e0,%eax
+0x80484c8 <main+88>:	mov    0x8049ce0,%edx
+0x80484ce <main+94>:	mov    $0x80495e0,%ecx
+0x80484d3 <main+99>:	mov    0x8049ce4,%ebx
+0x80484d9 <main+105>:	mov    (%edx,%eax,1),%al
+0x80484dc <main+108>:	cmp    (%ebx,%ecx,1),%al
+0x80484df <main+111>:	je     0x80484f8 <main+136>
+0x80484e1 <main+113>:	push   $0x8048581
+0x80484e6 <main+118>:	call   0x8048394 <printf>
+0x80484eb <main+123>:	add    $0x4,%esp
+0x80484ee <main+126>:	push   $0x0
+0x80484f0 <main+128>:	call   0x80483a4 <exit>
+0x80484f5 <main+133>:	add    $0x4,%esp
+0x80484f8 <main+136>:	incl   0x8049ce0
+0x80484fe <main+142>:	addl   $0xb,0x8049ce4
+0x8048505 <main+149>:	jmp    0x80484b4 <main+68>
+0x8048507 <main+151>:	push   $0x804859c
+0x804850c <main+156>:	call   0x8048394 <printf>
+0x8048511 <main+161>:	add    $0x4,%esp
+0x8048514 <main+164>:	xor    %eax,%eax
+0x8048516 <main+166>:	jmp    0x8048518 <main+168>
+0x8048518 <main+168>:	mov    0xfffffffc(%ebp),%ebx
+0x804851b <main+171>:	leave  
+0x804851c <main+172>:	ret
+
+#include <stdio.h>
+
+char *IP = "Input password: "; // $0x8048570
+char arr[1024]; // $0x80498e0
+char password[] = "A thousand Virginians of all classes and races rose up in arms against Berkeley, attacking Indians, chasing Berkeley from Jamestown, Virginia, and ultimately torching the capital. The rebellion was fi" ...; // $0x80495e0
+int len = 0; // $0x8049ce8
+int i = 0; // $0x8049ce4
+int j = 0; // $0x8049ce0
+char *success = "Congratulations! You got it!\n"; // $0x804859c
+char *fail = "Oops! wrong password! :-P\n"; // $0x8048581
+
+int main() {
+	printf(IP);
+	gets(arr);
+	len = strlen(password);
+	i = 0;
+	j = 0;
+
+	do {
+		if(len >= i) {
+			if(*(arr + j) != *(password + i)) {
+				printf(fail);
+				exit(0);
+			}
+			j++;
+			i += 0xb;
+		}
+
+		else {
+			printf(success);
+			return 0;
+		}
+	} while(1);
+}

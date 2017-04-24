@@ -1,0 +1,115 @@
+0x8048430 <main>:	push   %ebp
+0x8048431 <main+1>:	mov    %esp,%ebp
+0x8048433 <main+3>:	push   $0x8048570
+0x8048438 <main+8>:	call   0x8048370 <printf>
+0x804843d <main+13>:	add    $0x4,%esp
+0x8048440 <main+16>:	push   $0x8049700
+0x8048445 <main+21>:	call   0x8048330 <gets>
+0x804844a <main+26>:	add    $0x4,%esp
+0x804844d <main+29>:	push   $0x8049700
+0x8048452 <main+34>:	call   0x8048350 <strlen>
+0x8048457 <main+39>:	add    $0x4,%esp
+0x804845a <main+42>:	mov    %eax,0x8049b04
+0x804845f <main+47>:	cmpl   $0x0,0x8049b04
+0x8048466 <main+54>:	jle    0x8048488 <main+88>
+0x8048468 <main+56>:	mov    0x8049b04,%eax
+0x804846d <main+61>:	dec    %eax
+0x804846e <main+62>:	mov    $0x8049700,%edx
+0x8048473 <main+67>:	cmpb   $0xa,(%eax,%edx,1)
+0x8048477 <main+71>:	jne    0x8048488 <main+88>
+0x8048479 <main+73>:	mov    0x8049b04,%eax
+0x804847e <main+78>:	dec    %eax
+0x804847f <main+79>:	mov    $0x8049700,%edx
+0x8048484 <main+84>:	movb   $0x0,(%eax,%edx,1)
+0x8048488 <main+88>:	movl   $0x8049700,0x80496e0
+0x8048492 <main+98>:	movl   $0x80495c8,0x8049b00
+0x804849c <main+108>:	lea    0x0(%esi,1),%esi
+0x80484a0 <main+112>:	mov    0x80496e0,%eax
+0x80484a5 <main+117>:	cmpb   $0x0,(%eax)
+0x80484a8 <main+120>:	je     0x80484c7 <main+151>
+0x80484aa <main+122>:	mov    0x8049b00,%eax
+0x80484af <main+127>:	cmpb   $0x0,(%eax)
+0x80484b2 <main+130>:	je     0x80484c7 <main+151>
+0x80484b4 <main+132>:	mov    0x80496e0,%eax
+0x80484b9 <main+137>:	mov    0x8049b00,%edx
+0x80484bf <main+143>:	mov    (%eax),%al
+0x80484c1 <main+145>:	cmp    (%edx),%al
+0x80484c3 <main+147>:	je     0x80484d0 <main+160>
+0x80484c5 <main+149>:	jmp    0x80484c7 <main+151>
+0x80484c7 <main+151>:	jmp    0x80484e0 <main+176>
+0x80484c9 <main+153>:	lea    0x0(%esi,1),%esi
+0x80484d0 <main+160>:	incl   0x80496e0
+0x80484d6 <main+166>:	incl   0x8049b00
+0x80484dc <main+172>:	jmp    0x80484a0 <main+112>
+0x80484de <main+174>:	mov    %esi,%esi
+0x80484e0 <main+176>:	mov    0x80496e0,%eax
+0x80484e5 <main+181>:	cmpb   $0x0,(%eax)
+0x80484e8 <main+184>:	jne    0x8048503 <main+211>
+0x80484ea <main+186>:	mov    0x8049b00,%eax
+0x80484ef <main+191>:	cmpb   $0x0,(%eax)
+0x80484f2 <main+194>:	jne    0x8048503 <main+211>
+0x80484f4 <main+196>:	push   $0x8048581 Congratulation
+0x80484f9 <main+201>:	call   0x8048370 <printf>
+0x80484fe <main+206>:	add    $0x4,%esp
+0x8048501 <main+209>:	jmp    0x8048510 <main+224>
+0x8048503 <main+211>:	push   $0x804859f Oops
+0x8048508 <main+216>:	call   0x8048370 <printf>
+0x804850d <main+221>:	add    $0x4,%esp
+0x8048510 <main+224>:	xor    %eax,%eax
+0x8048512 <main+226>:	jmp    0x8048514 <main+228>
+0x8048514 <main+228>:	leave  
+0x8048515 <main+229>:	ret    
+0x8048516 <main+230>:	nop    
+0x8048517 <main+231>:	nop    
+0x8048518 <main+232>:	nop    
+0x8048519 <main+233>:	nop    
+0x804851a <main+234>:	nop    
+0x804851b <main+235>:	nop    
+0x804851c <main+236>:	nop    
+0x804851d <main+237>:	nop    
+0x804851e <main+238>:	nop    
+0x804851f <main+239>:	nop    
+
+password: th3p4ssw0rd
+
+0x8048570 -> "Input password: "
+0x8049700 -> buffer pointer
+
+#include <stdio.h>
+
+char *success = "Congratulations! You got it!\n"; // 0x8048581
+char *fail = "Oops! wrong password! :-P\n"; // 0x804859f
+char *password = "th3p4ssw0rd"; // 0x80495c8
+char *buffer; // 0x8049700
+int len = 0; // 0x8049b04
+char *p; // 0x80496e0
+char *q; // 0x8049b00
+
+int main() {
+	printf("Input password: ");
+	gets(buffer);
+
+	len = strlen(buffer);
+	if(len > 0) {
+		if(*(buffer + (len - 1)) == '\n') {
+			*(buffer + (len - 1)) = 0;
+		}
+	}
+	p = buffer;
+	q = password;
+	while(!(*p == 0 || *p == 0)) {
+		if(*p != *q) {
+			break;
+		}
+		p++;
+		q++;
+	}
+	if(*p != 0 or *q != 0) {
+		printf(fail);
+	}
+	else {
+		printf(success);
+	}
+
+	return 0;
+}
