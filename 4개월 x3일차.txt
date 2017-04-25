@@ -1,0 +1,54 @@
+<process map>
+	
+	<0x8048000 - 0x804a000>
+	
+		text
+
+	</0x8048000 - 0x804a000>
+	
+	<0x804a000 - 0x40000000>
+
+		reserved for heap
+
+	</0x804a000 - 0x40000000>
+
+	<0x40000000 - 0x4xxxxxxx>
+	
+		shared lib
+
+	</0x40000000 - 0x4xxxxxxx>
+
+	<0x4xxxxxxx - 0xbfffe000>
+
+		reserved for stack
+
+	</0x4xxxxxxx - 0xbfffe000>
+
+	<0xbfffe000 - 0xc0000000>
+		
+		stack
+
+	</0xbfffe000 - 0xc0000000>
+
+	<0xc0000000 - 0x100000000>
+
+		kernel region
+
+	</0xc0000000 - 0x100000000>
+
+	* 최신 운영체제 들은 훨씬 복잡함.
+	* 단계적으로 운영체제 버전을 높여가면서 학습.
+
+</process map>
+
+<함수 프롤로그>
+
+	
+
+</함수 프롤로그>
+
+<함수 에필로그>
+
+	
+
+</함수 에필로그>
