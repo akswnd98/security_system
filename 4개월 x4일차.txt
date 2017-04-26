@@ -1,0 +1,20 @@
+* gdb로 디버깅할 때 si는 함수 프롤로그 까지는 해줘야 ni를 했을 때 바로 빠져 나오지 않는다.
+
+* leave 명령어는 실제로 하나의 명령이 아니다.
+	leave = mov %ebp, %esp + pop %ebp이다.
+
+* ret 명령어도 사실 의미하는 명령어가 있다.
+	ret = pop %eip
+
+<main 함수>
+
+	main 함수의 argument를 명시 하지 않더라도, 항상 들어가는 argument가 있음.
+	순서는 다음과 같다.
+		int argc, char *argv[], 이후 환경변수 정의 문자열의 배열에 대한 포인터, 
+
+</main 함수>
+
+* 객체지향의 기본은 c언어 구조체 + 함수 포인터임.
+
+
+
