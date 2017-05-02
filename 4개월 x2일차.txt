@@ -76,3 +76,21 @@ int main() {
 		}
 	} while(1);
 }
+
+while(len >= i && *(arr + j) != *(password + i)) {
+	printf(fail);
+	exit(0);
+}
+
+printf(success);
+return 0;
+
+while(1) {
+	if() {
+		...
+	}
+
+	else {
+		...
+	}
+}

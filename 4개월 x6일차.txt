@@ -1,0 +1,29 @@
+<취약점>
+
+	- Buffer Overflow
+
+	취약한 함수를 사용하는 경우
+	
+	<취약한 함수>
+		
+		- gets, scanf, strcpy, ...
+
+	</취약한 함수>
+
+</취약점>
+
+* 1995년 공개된 문서 phrack
+	- Aleph One(닉네임)이 최초의 시스템 취약점을 문서로 공개.
+	- Smashing the stack for fun and profit
+
+
+* win32 api 리버싱 튜토리얼
+	- Lena's tutorial
+
+* exploit-db.com: 취약점 공개 사이트
+
+* int타입에 오버플로우 할 때 null은 쓰지 못하는 경우가 많음. 문자의 끝을 null로 표현하기 때문.
+
+* 공백은 쉘에서 ""로 감싸서 해결
+
+* 0xff의 경우에는 /bin/bash쉘의 버그 때문에 입력이 안되는데 /bin/bash2로 바꾸면 해결된다.

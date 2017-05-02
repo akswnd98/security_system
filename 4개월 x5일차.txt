@@ -1,0 +1,166 @@
+0x8048460 <main>:	push   %ebp
+0x8048461 <main+1>:	mov    %esp,%ebp
+0x8048463 <main+3>:	sub    $0x40c,%esp
+0x8048469 <main+9>:	push   $0x80485b0 // "Input password: "
+0x804846e <main+14>:	call   0x8048398 <printf>
+0x8048473 <main+19>:	add    $0x4,%esp
+0x8048476 <main+22>:	mov    0x80496f0,%eax // stdin = 0
+0x804847b <main+27>:	push   %eax
+0x804847c <main+28>:	push   $0x400
+0x8048481 <main+33>:	lea    0xfffffc00(%ebp),%eax // start of buffer in stack
+0x8048487 <main+39>:	push   %eax
+0x8048488 <main+40>:	call   0x8048368 <fgets>
+0x804848d <main+45>:	add    $0xc,%esp
+0x8048490 <main+48>:	lea    0xfffffc00(%ebp),%eax
+0x8048496 <main+54>:	push   %eax
+0x8048497 <main+55>:	call   0x8048378 <strlen>
+0x804849c <main+60>:	add    $0x4,%esp
+0x804849f <main+63>:	mov    %eax,0xfffffbf4(%ebp) // strlen의 값 저장
+0x80484a5 <main+69>:	cmpl   $0x0,0xfffffbf4(%ebp) // 0과 비교
+0x80484ac <main+76>:	jle    0x80484d2 <main+114> 
+0x80484ae <main+78>:	mov    0xfffffbf4(%ebp),%eax
+0x80484b4 <main+84>:	dec    %eax
+0x80484b5 <main+85>:	lea    0xfffffc00(%ebp),%edx
+0x80484bb <main+91>:	cmpb   $0xa,(%eax,%edx,1) // buffer의 맨 마지막 글자가 0x0a인지 확인
+0x80484bf <main+95>:	jne    0x80484d2 <main+114>
+0x80484c1 <main+97>:	mov    0xfffffbf4(%ebp),%eax
+0x80484c7 <main+103>:	dec    %eax
+0x80484c8 <main+104>:	lea    0xfffffc00(%ebp),%edx
+0x80484ce <main+110>:	movb   $0x0,(%eax,%edx,1)
+0x80484d2 <main+114>:	lea    0xfffffc00(%ebp),%ecx // %ecx = buffer
+
+
+0x80484d8 <main+120>:	mov    %ecx,0xfffffbfc(%ebp)
+0x80484de <main+126>:	movl   $0x8049608,0xfffffbf8(%ebp) // password, local_password
+
+
+0x80484e8 <main+136>:	mov    0xfffffbfc(%ebp),%eax
+0x80484ee <main+142>:	cmpb   $0x0,(%eax)
+0x80484f1 <main+145>:	je     0x8048512 <main+178>
+0x80484f3 <main+147>:	mov    0xfffffbf8(%ebp),%eax
+0x80484f9 <main+153>:	cmpb   $0x0,(%eax)
+0x80484fc <main+156>:	je     0x8048512 <main+178>
+0x80484fe <main+158>:	mov    0xfffffbfc(%ebp),%eax
+0x8048504 <main+164>:	mov    0xfffffbf8(%ebp),%edx
+0x804850a <main+170>:	mov    (%eax),%al
+0x804850c <main+172>:	cmp    (%edx),%al
+0x804850e <main+174>:	je     0x8048514 <main+180>
+0x8048510 <main+176>:	jmp    0x8048512 <main+178>
+
+
+0x8048512 <main+178>:	jmp    0x8048522 <main+194>
+
+
+0x8048514 <main+180>:	incl   0xfffffbfc(%ebp)
+0x804851a <main+186>:	incl   0xfffffbf8(%ebp)
+0x8048520 <main+192>:	jmp    0x80484e8 <main+136>
+
+
+0x8048522 <main+194>:	mov    0xfffffbfc(%ebp),%eax
+0x8048528 <main+200>:	cmpb   $0x0,(%eax)
+0x804852b <main+203>:	jne    0x8048547 <main+231>
+0x804852d <main+205>:	mov    0xfffffbf8(%ebp),%eax
+0x8048533 <main+211>:	cmpb   $0x0,(%eax)
+0x8048536 <main+214>:	jne    0x8048547 <main+231>
+0x8048538 <main+216>:	push   $0x80485c1
+0x804853d <main+221>:	call   0x8048398 <printf>
+0x8048542 <main+226>:	add    $0x4,%esp
+0x8048545 <main+229>:	jmp    0x8048554 <main+244>
+
+
+0x8048547 <main+231>:	push   $0x80485df
+0x804854c <main+236>:	call   0x8048398 <printf>
+0x8048551 <main+241>:	add    $0x4,%esp
+0x8048554 <main+244>:	xor    %eax,%eax
+
+
+0x8048556 <main+246>:	jmp    0x8048558 <main+248>
+0x8048558 <main+248>:	leave  
+0x8048559 <main+249>:	ret    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0x8048400 <main>:	push   %ebp
+0x8048401 <main+1>:	mov    %esp,%ebp
+0x8048403 <main+3>:	sub    $0x404,%esp
+0x8048409 <main+9>:	movl   $0x0,0xfffffffc(%ebp)
+0x8048410 <main+16>:	push   $0x8048510 // "password check program \n"
+0x8048415 <main+21>:	call   0x804832c <printf>
+0x804841a <main+26>:	add    $0x4,%esp
+0x804841d <main+29>:	cmpl   $0x1,0x8(%ebp)
+0x8048421 <main+33>:	jg     0x8048430 <main+48>
+0x8048423 <main+35>:	push   $0x0
+0x8048425 <main+37>:	call   0x804833c <exit>
+0x804842a <main+42>:	add    $0x4,%esp
+0x804842d <main+45>:	lea    0x0(%esi),%esi
+
+
+0x8048430 <main+48>:	mov    0xc(%ebp),%eax // argv
+0x8048433 <main+51>:	add    $0x4,%eax //
+0x8048436 <main+54>:	mov    (%eax),%edx // argv[1]
+0x8048438 <main+56>:	add    $0x4,%edx //
+0x804843b <main+59>:	cmpb   $0x0,(%edx) // *(argv[1] + 4)
+0x804843e <main+62>:	jne    0x804848b <main+139>
+
+
+0x8048440 <main+64>:	mov    0xc(%ebp),%eax
+0x8048443 <main+67>:	add    $0x4,%eax
+0x8048446 <main+70>:	mov    (%eax),%edx 
+0x8048448 <main+72>:	cmpb   $0x71,(%edx)
+0x804844b <main+75>:	je     0x8048450 <main+80>
+0x804844d <main+77>:	jmp    0x804848b <main+139>
+0x804844f <main+79>:	nop    
+0x8048450 <main+80>:	mov    0xc(%ebp),%eax
+0x8048453 <main+83>:	add    $0x4,%eax
+0x8048456 <main+86>:	mov    (%eax),%edx
+0x8048458 <main+88>:	inc    %edx
+0x8048459 <main+89>:	cmpb   $0x77,(%edx)
+0x804845c <main+92>:	je     0x8048460 <main+96>
+0x804845e <main+94>:	jmp    0x804848b <main+139>
+
+
+0x8048460 <main+96>:	mov    0xc(%ebp),%eax
+0x8048463 <main+99>:	add    $0x4,%eax
+0x8048466 <main+102>:	mov    (%eax),%edx
+0x8048468 <main+104>:	add    $0x2,%edx
+0x804846b <main+107>:	cmpb   $0x65,(%edx)
+0x804846e <main+110>:	je     0x8048472 <main+114>
+0x8048470 <main+112>:	jmp    0x804848b <main+139>
+
+
+0x8048472 <main+114>:	mov    0xc(%ebp),%eax
+0x8048475 <main+117>:	add    $0x4,%eax
+0x8048478 <main+120>:	mov    (%eax),%edx
+0x804847a <main+122>:	add    $0x3,%edx
+0x804847d <main+125>:	cmpb   $0x66,(%edx)
+0x8048480 <main+128>:	je     0x8048484 <main+132>
+0x8048482 <main+130>:	jmp    0x804848b <main+139>
+
+
+0x8048484 <main+132>:	movl   $0x1,0xfffffffc(%ebp)
+0x804848b <main+139>:	cmpl   $0x1,0xfffffffc(%ebp)
+0x804848f <main+143>:	jne    0x80484a0 <main+160>
+0x8048491 <main+145>:	push   $0x8048529
+0x8048496 <main+150>:	call   0x804832c <printf>
+0x804849b <main+155>:	add    $0x4,%esp
+0x804849e <main+158>:	jmp    0x80484ad <main+173>
+0x80484a0 <main+160>:	push   $0x8048547
+0x80484a5 <main+165>:	call   0x804832c <printf>
+0x80484aa <main+170>:	add    $0x4,%esp
+0x80484ad <main+173>:	xor    %eax,%eax
+0x80484af <main+175>:	jmp    0x80484b1 <main+177>
+0x80484b1 <main+177>:	leave  
+0x80484b2 <main+178>:	ret 
